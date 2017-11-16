@@ -16,4 +16,31 @@
 </p>
 
 <%= link_to 'Edit', edit_blog_path(@blog) %> |
-<%= link_to 'Back', blogs_path %>
+<%= link_to 'Back', blogs_path %><br><br>
+
+<%= form_with(model: Comment.new, local: true, url:blog_comments_path(@blog)) do |form| %>
+  <div class="field">
+    <%= form.label :author %><br>
+    <%= form.text_field :author %>
+  </div>
+  <div class="field">
+    <%= form.label :body %><br>
+    <%= form.text_field :body %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<p>
+  コメント一覧
+</p>
+   
+<% @blog.comments.each do |comment| %>
+  <p>
+    <strong>Author:</strong>
+    <%= comment.author %><br>
+    <strong>Body:</strong>
+    <%= comment.body %>
+  </p>
+<% end %>
